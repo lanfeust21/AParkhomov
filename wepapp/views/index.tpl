@@ -76,7 +76,7 @@
     </div>
       <nav>
           <ul>
-              <li>Table of Stable Isotopes</li>
+              <li><a href="/isotopes">Table of Stable Isotopes</a></li>
               <li>Table of conversion 2 Nucleides into 2 Nucleides</li>
               <li>Tables of Fusion and Fission</li>
               <li>Tables for В,С, N, O, Al, Ni, Cu, W</li>
