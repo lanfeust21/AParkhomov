@@ -8,9 +8,21 @@ The csv files has been imported in a _sqlite3 database_ located in db/sqlite/apa
 
 You can analyse the data with sql and the interface directly with the application found on http://sqlitebrowser.org/ for each system.
 
-# to run the application
+#1 to run the application with go (for developper)
 
 The application will run a webserver locally on the port 8080 by default. It is developped in Golang and use the beego framework with a sqlite3 driver. 
+
+## setup go
+go to https://golang.org/dl/ and download the installer 
+
+## setup beego and bee (at the console)
+>go get github.com/beego/bee
+
+## start local webserver (at the console)
+> cd webapp
+> bee run 
+
+open the browser and enter http://localhost:8080/
 
 
 # Docker
