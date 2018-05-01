@@ -1,0 +1,7 @@
+*.zip
+*.db
+.DS_Store
+.idea/**/*
+.idea/*
+wepapp/bower_components/**/*
+wepapp/bower_components/*
