@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  webapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./conf/app.conf:/wepapp/conf/app.conf
+
+    restart: always
+    environment:
+      BEEGO_RUNMODE: "local-dev"

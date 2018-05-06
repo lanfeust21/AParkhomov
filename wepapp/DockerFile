@@ -1,0 +1,11 @@
+FROM debian:jessie
+
+RUN mkdir -p /webapp/conf
+
+ADD ./static /webapp/static
+ADD ./views /webapp/views
+
+ADD ./webapp-app /webapp/webapp-app
+
+WORKDIR /webapp
+ENTRYPOINT ["./webapp-app"]
