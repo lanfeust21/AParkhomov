@@ -77,8 +77,8 @@
       <nav>
           <ul>
               <li><a href="/isotopes">Table of Stable Isotopes</a></li>
-              <li>Table of conversion 2 Nucleides into 2 Nucleides</li>
-              <li>Tables of Fusion and Fission</li>
+              <li><a href="/transmutations22">Table of conversion 2 Nucleides into 2 Nucleides</a></li>
+              <li><a href="/fusionsfission">Tables of Fusion and Fission</a></li>
               <li>Tables for В,С, N, O, Al, Ni, Cu, W</li>
           </ul>
       </nav>

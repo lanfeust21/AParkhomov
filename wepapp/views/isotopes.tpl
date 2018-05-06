@@ -23,6 +23,13 @@
         .m300 {
             width: 900px;
         }
+        .autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
+        .autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+        .autocomplete-selected { background: #F0F0F0; }
+        .autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
+        .autocomplete-group { padding: 2px 5px; }
+        .autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
+
     </style>
 </head>
 <body>
@@ -35,26 +42,26 @@
     <nav>
         <ul>
             <li><a href="/isotopes">Table of Stable Isotopes</a></li>
-            <li>Table of conversion 2 Nucleides into 2 Nucleides</li>
-            <li>Tables of Fusion and Fission</li>
+            <li><a href="/transmutations22">Table of conversion 2 Nucleides into 2 Nucleides</a></li>
+            <li><a href="/fusionsfission">Tables of Fusion and Fission</a></li>
             <li>Tables for В,С, N, O, Al, Ni, Cu, W</li>
         </ul>
     </nav>
 </header>
 <div id="stable">
-    <form action="/isotopes" method="post"  class="form m300">
+    <form action="/isotopes" method="post"  class="form m300 form-inline">
         <strong>search by:</strong>
         <p class="form-group">
             <label for="element">Element</label>
-            <input class="form-control" type="text" name="element" value=""/>
+            <input class="form-control" type="text" name="element" size="2" id="Element" value="{{.Element}}"/>
         </p>
         <p class="form-group">
             <label for="a">A</label>
-            <input class="form-control" type="text" name="A" value=""/>
+            <input class="form-control" type="text" name="A" value="{{.A}}"/>
         </p>
         <p class="form-group">
             <label for="z">Z</label>
-            <input class="form-control" type="text" name="Z" value=""/>
+            <input class="form-control" type="text" name="Z" value="{{.Z}}"/>
         </p>
         <input type="submit" name="Filter" value="filter"/>
     </form>
@@ -94,8 +101,11 @@
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/static/js/jquery-3.3.1.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/static/js/bootstrap.min.js"></script>
-<script src="/static/js/bootstrap-table.min.js"></script>
+<script src="/static/js/jquery.autocomplete.min.js"></script>
+<script>
+    $('#Element').autocomplete({
+        serviceUrl: '/isotopes/element'
+    });
+</script>
 </body>
 </html>

@@ -3,6 +3,7 @@ package controllers
 import (
 	"github.com/go-errors/errors"
 	"github.com/astaxie/beego"
+
 )
 type BaseController struct {
 	beego.Controller
