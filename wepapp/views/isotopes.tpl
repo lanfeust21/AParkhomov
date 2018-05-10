@@ -29,7 +29,10 @@
         .autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
         .autocomplete-group { padding: 2px 5px; }
         .autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
-
+        .ui-autocomplete-custom {
+            background: #87ceeb;
+            z-index: 2;
+        }
     </style>
 </head>
 <body>
@@ -43,13 +46,13 @@
         <ul>
             <li><a href="/isotopes">Table of Stable Isotopes</a></li>
             <li><a href="/transmutations22">Table of conversion 2 Nucleides into 2 Nucleides</a></li>
-            <li><a href="/fusionsfission">Tables of Fusion and Fission</a></li>
-            <li>Tables for В,С, N, O, Al, Ni, Cu, W</li>
+            <li><a href="/fusions">Tables of Fusions</a></li>
+            <li><a href="/fissions">Tables of Fissions</a></li>
         </ul>
     </nav>
 </header>
 <div id="stable">
-    <form action="/isotopes" method="post"  class="form m300 form-inline">
+    <form action="/isotopes" method="post"  class="form m300 form-inline" id="isotopes">
         <strong>search by:</strong>
         <p class="form-group">
             <label for="element">Element</label>
@@ -96,6 +99,9 @@
     <div class="author">
         Official website:
         <a href="http://www.quantumheat.org/index.php/en/">QuantumHeat.org</a>
+        &nbsp;
+        Source:
+        <a href="https://github.com/lanfeust21/AParkhomov">https://github.com/lanfeust21/AParkhomov</a>
     </div>
 </footer>
 
@@ -104,7 +110,8 @@
 <script src="/static/js/jquery.autocomplete.min.js"></script>
 <script>
     $('#Element').autocomplete({
-        serviceUrl: '/isotopes/element'
+        serviceUrl: '/isotopes/element',
+        select: function(event, ui) { $("#isotopes").submit(); }
     });
 </script>
 </body>

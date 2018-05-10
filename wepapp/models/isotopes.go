@@ -14,8 +14,8 @@ func init() {
 type Isotope struct {
 	Id      int64  `orm:"auto;pk;column(id)" db:"id"`
 	Element string `orm:"column(element)"  db:"element"`
-	A       string `orm:"column(A)"  db:"A"`
-	Z       string `orm:"column(Z)"  db:"Z"`
+	A       int `orm:"column(A)"  db:"A"`
+	Z       int `orm:"column(Z)"  db:"Z"`
 	AEM     string `orm:"column(a.e.m)"  db:"a.e.m"`
 	Mev     string `orm:"column(Mev)"  db:"Mev"`
 	Percent string `orm:"column(%)"  db:"%"`
@@ -66,11 +66,10 @@ type Element struct {
 func GetIsotopeElements(element string) ([]string, error) {
 
 	var elements []Element
-	_,err := orm.NewOrm().Raw("SELECT DISTINCT  T0.`element` FROM `stable_isotopes` T0 WHERE T0.`element` LIKE ? ORDER BY T0.`element` ASC LIMIT 10", element).QueryRows(&elements)
+	_,err := orm.NewOrm().Raw("SELECT DISTINCT  T0.`element` FROM `stable_isotopes` T0 WHERE T0.`element` LIKE '" + element + "%' ORDER BY T0.`element` ASC LIMIT 10").QueryRows(&elements)
 	if err != nil {
 		return nil, errors.Wrap(err, 0)
 	}
-
 	elms := []string{}
 	for _, elm := range elements {
 		elms = append(elms, elm.Element)

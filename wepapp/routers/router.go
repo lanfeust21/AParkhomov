@@ -15,6 +15,13 @@ func init() {
 	beego.Router("/transmutations22/element3", &controllers.Transmutation22Controller{}, "get:Autocomplete3")
 	beego.Router("/transmutations22/element4", &controllers.Transmutation22Controller{}, "get:Autocomplete4")
 
-	//beego.Router("/fusionsfissions", &controllers.IsotopesController{})
-	//beego.Router("/fusions", &controllers.IsotopesController{})
+	beego.Router("/fusions", &controllers.FusionController{})
+	beego.Router("/fusions/element1", &controllers.FusionController{}, "get:Autocomplete1")
+	beego.Router("/fusions/element2", &controllers.FusionController{}, "get:Autocomplete2")
+	beego.Router("/fusions/element", &controllers.FusionController{}, "get:Autocomplete")
+
+	beego.Router("/fissions", &controllers.FissionController{})
+	beego.Router("/fissions/element1", &controllers.FissionController{}, "get:Autocomplete1")
+	beego.Router("/fissions/element2", &controllers.FissionController{}, "get:Autocomplete2")
+	beego.Router("/fissions/element", &controllers.FissionController{}, "get:Autocomplete")
 }

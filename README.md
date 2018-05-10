@@ -30,3 +30,5 @@ open the browser and enter http://localhost:8080/
 The DockerFile allow to run the application in a docker container. it allows you to run it locally with docker installed or on any server with docker installed.
 
 
+
+

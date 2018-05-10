@@ -78,8 +78,8 @@
           <ul>
               <li><a href="/isotopes">Table of Stable Isotopes</a></li>
               <li><a href="/transmutations22">Table of conversion 2 Nucleides into 2 Nucleides</a></li>
-              <li><a href="/fusionsfission">Tables of Fusion and Fission</a></li>
-              <li>Tables for В,С, N, O, Al, Ni, Cu, W</li>
+              <li><a href="/fusions">Tables of Fusions</a></li>
+              <li><a href="/fissions">Tables of Fissions</a></li>
           </ul>
       </nav>
   </header>
@@ -90,6 +90,9 @@
     <div class="author">
       Official website:
       <a href="http://www.quantumheat.org/index.php/en/">QuantumHeat.org</a>
+        &nbsp;
+        Source:
+        <a href="https://github.com/lanfeust21/AParkhomov">https://github.com/lanfeust21/AParkhomov</a>
     </div>
   </footer>
 
