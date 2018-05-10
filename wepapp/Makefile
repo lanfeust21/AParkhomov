@@ -13,12 +13,12 @@ clean:
 
 $(PROJECT): clean
 	echo Building for $(GOOS)/$(GOARCH)
-	GOOS=$(GOOS) GOARCH=$(GOARCH) go build -a -o $(PROJECT)
+	CGO_ENABLED=1 GOOS=$(GOOS) GOARCH=$(GOARCH) go build -a -o $(PROJECT)
 
 docker-build: $(PROJECT)
 	docker build .
 
 deploy-local: docker-build
-	ENV=local-dev docker-compose -p webapp up -d
+	ENV=dev docker-compose -p webapp up -d
 
 .PHONY: deploy-local

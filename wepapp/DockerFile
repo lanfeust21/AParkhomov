@@ -1,7 +1,9 @@
 FROM debian:jessie
+RUN apt-get update && apt-get install sqlite3 libsqlite3-0
 
-RUN mkdir -p /webapp/conf
-
+RUN mkdir -p /webapp/
+ADD ./db/sqlite /webapp/db/sqlite
+ADD ./conf /webapp/conf
 ADD ./static /webapp/static
 ADD ./views /webapp/views
 
