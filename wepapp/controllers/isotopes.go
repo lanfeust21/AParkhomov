@@ -16,6 +16,7 @@ func (c *IsotopesController) Get() {
 		c.Error(http.StatusInternalServerError, err)
 		return
 	}
+	c.Data["Count"] = len(isotopes)
 	c.Data["Isotopes"] = isotopes
 	c.TplName = "isotopes.tpl"
 }
@@ -30,6 +31,7 @@ func (c *IsotopesController) Post() {
 		c.Error(http.StatusInternalServerError, err)
 		return
 	}
+	c.Data["Count"] = len(isotopes)
 	c.Data["Isotopes"] = isotopes
 	c.Data["Element"] = element
 	c.Data["A"] = A

@@ -26,6 +26,12 @@ type Fission struct {
 func (i *Fission) TableName() string {
 	return "Fission"
 }
+func (i *Fission) ToList() []string {
+	return []string{i.Element,string(i.A),string(i.Z),i.Element1,string(i.A1),string(i.Z1),i.Element2,string(i.A2),string(i.Z2),i.Mev}
+}
+func (i *Fission) ToHeader() []string {
+	return []string{"Element","A","Z","Element1","A1","Z1","Element2","i.A2","i.Z2","Mev"}
+}
 
 func GetAllFissions(offset int, limit int) ([]*Fission, error) {
 	var Fissions []*Fission

@@ -68,7 +68,7 @@
         </p>
         <input type="submit" name="Filter" value="filter"/>
     </form>
-
+    <div>count:{{.Count}}</div>
     <table class="table table-striped m900">
         <thead>
         <tr>

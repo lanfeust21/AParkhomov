@@ -26,6 +26,12 @@ type Fusion struct {
 func (i *Fusion) TableName() string {
 	return "fusion"
 }
+func (i *Fusion) ToList() []string {
+	return []string{i.Element1,string(i.A1),string(i.Z1),i.Element2,string(i.A2),string(i.Z2),i.Element,string(i.A),string(i.Z),i.Mev}
+}
+func (i *Fusion) ToHeader() []string {
+	return []string{"Element1","A1","Z1","Element2","i.A2","i.Z2","Element","A","Z","Mev"}
+}
 
 func GetAllFusions(offset int, limit int) ([]*Fusion, error) {
 	var Fusions []*Fusion

@@ -23,6 +23,9 @@
         .m300 {
             width: 900px;
         }
+        .source {
+            color: #3399FF;
+        }
         .autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
         .autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
         .autocomplete-selected { background: #F0F0F0; }
@@ -54,8 +57,8 @@
     <h2>Stable Transmutations</h2>
     <div class="description">
         <pre>
-            first pair              -----> second pair
-            N1(A1, Z1) + N2(A2, Z2) -----> N3(A3, Z3) + N4(A4, Z4)
+            <span class="source">first pair (sources)</span>     -----> second pair (products)
+            <span class="source">N1(A1, Z1) + N2(A2, Z2)</span> -----> N3(A3, Z3) + N4(A4, Z4)
             A1 + A2 = A3 + A4 ,    Z1 + Z2 = Z3 + Z4
         </pre>
     </div>
@@ -123,38 +126,43 @@
         </p>
         <input type="submit" name="Filter" value="filter"/>
     </form>
-{{if gt .paginator.PageNums 1}}
+    {{ $QS := .QueryString }}
     <ul class="pagination pagination-sm">
+    {{if gt .paginator.PageNums 1}}
     {{if .paginator.HasPrev}}
-        <li><a href="{{.paginator.PageLinkFirst}}">First Page</a></li>
-        <li><a href="{{.paginator.PageLinkPrev}}">&lt;</a></li>
+        <li>{{ Link .paginator.PageLinkFirst "First Page" $QS }}</li>
+        <li>{{ Link .paginator.PageLinkPrev "&lt;" $QS }}</li>
     {{else}}
         <li class="disabled"><a>First Page</a></li>
         <li class="disabled"><a>&lt;</a></li>
     {{end}}
     {{range $index, $page := .paginator.Pages}}
         <li{{if $.paginator.IsActive .}} class="active"{{end}}>
-            <a href="{{$.paginator.PageLink $page}}">{{$page}}</a>
+        {{ $pagelink :=  $.paginator.PageLink $page }}
+        {{ Link $pagelink $page $QS }}
         </li>
     {{end}}
     {{if .paginator.HasNext}}
-        <li><a href="{{.paginator.PageLinkNext}}">&gt;</a></li>
-        <li><a href="{{.paginator.PageLinkLast}}">Last Page</a></li>
+        <li>{{ Link .paginator.PageLinkNext "&gt;" $QS }}</li>
+        <li>{{ Link .paginator.PageLinkLast "Last Page" $QS }}</li>
     {{else}}
         <li class="disabled"><a>&gt;</a></li>
         <li class="disabled"><a>Last Page</a></li>
     {{end}}
+    {{end}}
+        <li>{{ Link "/transmutations22" "Direct Link" $QS }}</li>
+        <li>{{ Link "/transmutations22/csv" "CSV Export" $QS }}</li>
+        <li>Count:<strong>{{.Count}}</strong></li>
     </ul>
-{{end}}
     <table class="table table-striped m900">
         <thead>
         <tr>
-            <th>Element1</th>
-            <th>A1</th>
-            <th>Z2</th>
-            <th>Element2</th>
-            <th>A2</th>
-            <th>Z2</th>
+            <th class="source">Element1</th>
+            <th class="source">A1</th>
+            <th class="source">Z2</th>
+            <th class="source">Element2</th>
+            <th class="source">A2</th>
+            <th class="source">Z2</th>
             <th>Element3</th>
             <th>A3</th>
             <th>Z3</th>
@@ -167,12 +175,12 @@
         <tbody>
         {{range $transmutation := .Transmutations }}
         <tr>
-            <td>{{$transmutation.Element1}}</td>
-            <td>{{$transmutation.A1}}</td>
-            <td>{{$transmutation.Z1}}</td>
-            <td>{{$transmutation.Element2}}</td>
-            <td>{{$transmutation.A2}}</td>
-            <td>{{$transmutation.Z2}}</td>
+            <td class="source">{{$transmutation.Element1}}</td>
+            <td class="source">{{$transmutation.A1}}</td>
+            <td class="source">{{$transmutation.Z1}}</td>
+            <td class="source">{{$transmutation.Element2}}</td>
+            <td class="source">{{$transmutation.A2}}</td>
+            <td class="source">{{$transmutation.Z2}}</td>
             <td>{{$transmutation.Element3}}</td>
             <td>{{$transmutation.A3}}</td>
             <td>{{$transmutation.Z3}}</td>
@@ -184,29 +192,33 @@
         {{ end }}
         </tbody>
     </table>
-{{if gt .paginator.PageNums 1}}
     <ul class="pagination pagination-sm">
+    {{if gt .paginator.PageNums 1}}
     {{if .paginator.HasPrev}}
-        <li><a href="{{.paginator.PageLinkFirst}}">First Page</a></li>
-        <li><a href="{{.paginator.PageLinkPrev}}">&lt;</a></li>
+        <li>{{ Link .paginator.PageLinkFirst "First Page" $QS }}</li>
+        <li>{{ Link .paginator.PageLinkPrev "&lt;" $QS }}</li>
     {{else}}
         <li class="disabled"><a>First Page</a></li>
         <li class="disabled"><a>&lt;</a></li>
     {{end}}
     {{range $index, $page := .paginator.Pages}}
         <li{{if $.paginator.IsActive .}} class="active"{{end}}>
-            <a href="{{$.paginator.PageLink $page}}">{{$page}}</a>
+        {{ $pagelink :=  $.paginator.PageLink $page }}
+        {{ Link $pagelink $page $QS }}
         </li>
     {{end}}
     {{if .paginator.HasNext}}
-        <li><a href="{{.paginator.PageLinkNext}}">&gt;</a></li>
-        <li><a href="{{.paginator.PageLinkLast}}">Last Page</a></li>
+        <li>{{ Link .paginator.PageLinkNext "&gt;" $QS }}</li>
+        <li>{{ Link .paginator.PageLinkLast "Last Page" $QS }}</li>
     {{else}}
         <li class="disabled"><a>&gt;</a></li>
         <li class="disabled"><a>Last Page</a></li>
     {{end}}
+    {{end}}
+        <li>{{ Link "/transmutations22" "Direct Link" $QS }}</li>
+        <li>{{ Link "/transmutations22/csv" "CSV Export" $QS }}</li>
+        <li>Count:<strong>{{.Count}}</strong></li>
     </ul>
-{{end}}
 </div>
 <footer>
     <div class="author">

@@ -18,3 +18,5 @@ func (c *BaseController) Error(status int, err error) {
 
 	c.CustomAbort(status, err.Error())
 }
+
+

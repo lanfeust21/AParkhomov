@@ -30,6 +30,13 @@ func (i *Transmutation22) TableName() string {
 	return "stable_isotopes_22"
 }
 
+func (i *Transmutation22) ToList() []string {
+	return []string{i.Element1,string(i.A1),string(i.Z1),i.Element2,string(i.A2),string(i.Z2),i.Element3,string(i.A3),string(i.Z3),i.Element4,string(i.A4),string(i.Z4),i.Mev}
+}
+func (i *Transmutation22) ToHeader() []string {
+	return []string{"Element1","A1","Z1","Element2","i.A2","i.Z2","Element3","A3","Z3","Element4","A4","Z4","Mev"}
+}
+
 func GetAllTransmutations(offset int, limit int) ([]*Transmutation22, error) {
 	var transmutations []*Transmutation22
 

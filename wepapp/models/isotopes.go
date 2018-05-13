@@ -77,3 +77,22 @@ func GetIsotopeElements(element string) ([]string, error) {
 
 	return elms, nil
 }
+
+func GetIsotopesCount(element string, A string, Z string) (int64, error) {
+	q:= orm.NewOrm().QueryTable(&Isotope{})
+	if len(element) > 0 {
+		q = q.Filter("element", element)
+	}
+	if len(A) > 0 {
+		q = q.Filter("A", A)
+	}
+	if len(Z) > 0 {
+		q = q.Filter("Z", Z)
+	}
+	count, err := q.Count()
+	if err != nil {
+		return -1, errors.Wrap(err, 0)
+	}
+
+	return count, nil
+}

@@ -23,6 +23,9 @@
         .m300 {
             width: 900px;
         }
+        .source {
+            color: #3399FF;
+        }
         .autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
         .autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
         .autocomplete-selected { background: #F0F0F0; }
@@ -54,7 +57,8 @@
     <h2>Nuclear fission</h2>
     <div class="description">
         <pre>
-                N(A, Z) -----> N1(A1, Z1) + N2(A2, Z2)
+            <span class="source">source</span>  -----> pair (products)
+            <span class="source">N(A, Z)</span> -----> N1(A1, Z1) + N2(A2, Z2)
                 A = A1 + A2 ,  Z = Z1 + Z2
         </pre>
     </div>
@@ -110,51 +114,57 @@
         </p>
         <input type="submit" name="Filter" value="filter"/>
     </form>
-{{if gt .paginator.PageNums 1}}
+    {{ $QS := .QueryString }}
     <ul class="pagination pagination-sm">
+    {{if gt .paginator.PageNums 1}}
     {{if .paginator.HasPrev}}
-        <li><a href="{{.paginator.PageLinkFirst}}">First Page</a></li>
-        <li><a href="{{.paginator.PageLinkPrev}}">&lt;</a></li>
+        <li>{{ Link .paginator.PageLinkFirst "First Page" $QS }}</li>
+        <li>{{ Link .paginator.PageLinkPrev "&lt;" $QS }}</li>
     {{else}}
         <li class="disabled"><a>First Page</a></li>
         <li class="disabled"><a>&lt;</a></li>
     {{end}}
     {{range $index, $page := .paginator.Pages}}
         <li{{if $.paginator.IsActive .}} class="active"{{end}}>
-            <a href="{{$.paginator.PageLink $page}}">{{$page}}</a>
+        {{ $pagelink :=  $.paginator.PageLink $page }}
+        {{ Link $pagelink $page $QS }}
         </li>
     {{end}}
     {{if .paginator.HasNext}}
-        <li><a href="{{.paginator.PageLinkNext}}">&gt;</a></li>
-        <li><a href="{{.paginator.PageLinkLast}}">Last Page</a></li>
+        <li>{{ Link .paginator.PageLinkNext "&gt;" $QS }}</li>
+        <li>{{ Link .paginator.PageLinkLast "Last Page" $QS }}</li>
     {{else}}
         <li class="disabled"><a>&gt;</a></li>
         <li class="disabled"><a>Last Page</a></li>
     {{end}}
+    {{end}}
+        <li>{{ Link "/fissions" "Direct Link" $QS }}</li>
+        <li>{{ Link "/fissions/csv" "CSV Export" $QS }}</li>
+        <li>Count:<strong>{{.Count}}</strong></li>
     </ul>
-{{end}}
     <table class="table table-striped m900">
         <thead>
         <tr>
+            <th class="source">Element</th>
+            <th class="source">A</th>
+            <th class="source">Z</th>
             <th>Element1</th>
             <th>A1</th>
             <th>Z2</th>
             <th>Element2</th>
             <th>A2</th>
             <th>Z2</th>
-            <th>Element</th>
-            <th>A</th>
-            <th>Z</th>
+
             <th>MeV</th>
         </tr>
         </thead>
         <tbody>
         {{range $fission := .Fissions }}
         <tr>
+            <td class="source">{{$fission.Element}}</td>
+            <td class="source">{{$fission.A}}</td>
+            <td class="source">{{$fission.Z}}</td>
             <td>{{$fission.Element1}}</td>
-            <td>{{$fission.Element}}</td>
-            <td>{{$fission.A}}</td>
-            <td>{{$fission.Z}}</td>
             <td>{{$fission.A1}}</td>
             <td>{{$fission.Z1}}</td>
             <td>{{$fission.Element2}}</td>
@@ -165,29 +175,33 @@
         {{ end }}
         </tbody>
     </table>
-{{if gt .paginator.PageNums 1}}
     <ul class="pagination pagination-sm">
+    {{if gt .paginator.PageNums 1}}
     {{if .paginator.HasPrev}}
-        <li><a href="{{.paginator.PageLinkFirst}}">First Page</a></li>
-        <li><a href="{{.paginator.PageLinkPrev}}">&lt;</a></li>
+        <li>{{ Link .paginator.PageLinkFirst "First Page" $QS }}</li>
+        <li>{{ Link .paginator.PageLinkPrev "&lt;" $QS }}</li>
     {{else}}
         <li class="disabled"><a>First Page</a></li>
         <li class="disabled"><a>&lt;</a></li>
     {{end}}
     {{range $index, $page := .paginator.Pages}}
         <li{{if $.paginator.IsActive .}} class="active"{{end}}>
-            <a href="{{$.paginator.PageLink $page}}">{{$page}}</a>
+        {{ $pagelink :=  $.paginator.PageLink $page }}
+        {{ Link $pagelink $page $QS }}
         </li>
     {{end}}
     {{if .paginator.HasNext}}
-        <li><a href="{{.paginator.PageLinkNext}}">&gt;</a></li>
-        <li><a href="{{.paginator.PageLinkLast}}">Last Page</a></li>
+        <li>{{ Link .paginator.PageLinkNext "&gt;" $QS }}</li>
+        <li>{{ Link .paginator.PageLinkLast "Last Page" $QS }}</li>
     {{else}}
         <li class="disabled"><a>&gt;</a></li>
         <li class="disabled"><a>Last Page</a></li>
     {{end}}
+    {{end}}
+        <li>{{ Link "/fissions" "Direct Link" $QS }}</li>
+        <li>{{ Link "/fissions/csv" "CSV Export" $QS }}</li>
+        <li>Count:<strong>{{.Count}}</strong></li>
     </ul>
-{{end}}
 </div>
 <footer>
     <div class="author">
