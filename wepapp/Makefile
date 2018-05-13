@@ -13,8 +13,8 @@ clean:
 
 $(PROJECT): clean
 	echo Building for $(GOOS)/$(GOARCH)
-	CGO_ENABLED=1 GOOS=$(GOOS) GOARCH=$(GOARCH) go build -a -o $(PROJECT)
-
+	#CGO_ENABLED=1 GOOS=$(GOOS) GOARCH=$(GOARCH) go build -a -o $(PROJECT)
+    xgo   -targets=linux/amd64 -out $(PROJECT) .
 docker-build: $(PROJECT)
 	docker build .
 

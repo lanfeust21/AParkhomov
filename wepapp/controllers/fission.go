@@ -230,7 +230,7 @@ func (c *FissionController) Csv() {
 	element := c.GetString("element")
 	A := c.GetString("A")
 	Z := c.GetString("Z")
-	
+
 	count, err := models.GetFissionsCount(element1, A1, Z1, element2, A2, Z2, element, A, Z)
 	if err != nil {
 		c.Error(http.StatusInternalServerError, err)
