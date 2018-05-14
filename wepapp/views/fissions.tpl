@@ -62,7 +62,7 @@
                 A = A1 + A2 ,  Z = Z1 + Z2
         </pre>
     </div>
-    <form action="/fusions" method="post"  class="form form-inline">
+    <form action="/fissions" method="post"  class="form form-inline">
         <strong>search by:</strong>
         <p class="form-group">
             <label for="element">Element</label>
