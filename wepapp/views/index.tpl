@@ -32,6 +32,7 @@
       padding: 250px 0 70px;
       font-weight: normal;
       text-shadow: 0px 1px 2px #ddd;
+      line-height: normal;
     }
 
     header {
