@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>Welcome to Alexander Parkhomov Nuclear Data</title>
+  <title>Welcome to the net positive simple nuclear reaction search site</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
   <style type="text/css">
@@ -69,10 +69,10 @@
 
 <body>
   <header>
-    <h1 class="logo">Welcome to Alexander Parkhomov Nuclear Data</h1>
-    <h2>Martin Fleischmann Memorial Project QuantumHeat.org</h2>
+    <h1 class="logo">Welcome to the net positive simple nuclear reaction search site</h1>
+    <h2>This website is here to help you analyse and use data provided by Alexander Parkhomov</h2>
     <div class="description">
-      This Website is here to help you analyze date provided by Alexander Parkhomov
+        Facilitated by the Martin Fleischmann Memorial Project @ QuantumHeat.org
     </div>
       <nav>
           <ul>

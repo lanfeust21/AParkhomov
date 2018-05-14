@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Welcome to Alexander Parkhomov Nuclear Data</title>
+    <title>Table of Nuclear fission - data provided by Alexander Parkhomov</title>
 
     <!-- Bootstrap -->
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,8 @@
 </head>
 <body>
 <header>
-    <h1 class="logo">Table of Nuclear fission - Alexander Parkhomov Nuclear Data</h1>
-    <h2>Martin Fleischmann Memorial Project QuantumHeat.org</h2>
+    <h1 class="logo">Table of Nuclear fission - data provided by Alexander Parkhomov</h1>
+    <h2>Facilitated by the Martin Fleischmann Memorial Project @ QuantumHeat.org</h2>
 
     <nav>
         <ul>
