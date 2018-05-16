@@ -45,10 +45,10 @@
 
     <nav>
         <ul>
-            <li><a href="/isotopes">Table of Stable Isotopes</a></li>
-            <li><a href="/transmutations22">Table of conversion 2 Nucleides into 2 Nucleides</a></li>
-            <li><a href="/fusions">Tables of Fusions</a></li>
-            <li><a href="/fissions">Tables of Fissions</a></li>
+            <li><a href="/isotopes">Considered Isotopes</a></li>
+            <li><a href="/transmutations22">2 to 2 atom nucleon transfer reactions</a></li>
+            <li><a href="/fusions">Fusion reactions</a></li>
+            <li><a href="/fissions">Fission reactions</a></li>
         </ul>
     </nav>
 </header>
@@ -122,6 +122,16 @@
                 <option value="250" {{if eq .Limit "250"}} selected="true"{{end}}>250</option>
                 <option value="500" {{if eq .Limit "500"}} selected="true"{{end}}>500</option>
                 <option value="1000" {{if eq .Limit "1000"}} selected="true"{{end}}>1000</option>
+            </select>
+        </p>
+        <p class="form-group">
+            <label for="sortorder">Sort Order</label>
+            <select class="form-control"  name="sortorder">
+                <option value="-Mev" {{if eq .Sortorder "-Mev"}} selected="true"{{end}}>Mev desc</option>
+                <option value="-A1,-Z1,-Mev" {{if eq .Sortorder "-A1,-Z1,-Mev"}} selected="true"{{end}}>A1 desc,Z1 desc,Mev desc</option>
+                <option value="-A2,-Z2,-Mev" {{if eq .Sortorder "-A2,-Z2,-Mev"}} selected="true"{{end}}>A2 desc,Z2 desc,Mev desc</option>
+                <option value="-A3,-Z3,-Mev" {{if eq .Sortorder "-A3,-Z3,-Mev"}} selected="true"{{end}}>A3 desc,Z3 desc,Mev desc</option>
+                <option value="-A4,-Z4,-Mev" {{if eq .Sortorder "-A4,-Z4,-Mev"}} selected="true"{{end}}>A4 desc,Z4 desc,Mev desc</option>
             </select>
         </p>
         <input type="submit" name="Filter" value="filter"/>

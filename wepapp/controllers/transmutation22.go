@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"encoding/csv"
 	"fmt"
+	"strings"
 )
 
 type Transmutation22Controller struct {
@@ -97,6 +98,15 @@ func (c *Transmutation22Controller) Get() {
 		}
 		queryString += fmt.Sprintf("%s=%s", "Z4", Z4)
 	}
+	sortorders := []string{"-Mev"}
+	sortorder := c.GetString("sortorder")
+	if len(sortorder) > 0 {
+		if len(queryString) > 0 {
+			queryString += "&"
+		}
+		queryString += fmt.Sprintf("%s=%s", "sortorder", sortorder)
+		sortorders = strings.Split(sortorder, ",")
+	}
 
 	limit := "50"
 	if len(c.GetString("limit")) > 0 {
@@ -116,7 +126,7 @@ func (c *Transmutation22Controller) Get() {
 
 	paginator := pagination.SetPaginator(c.Ctx, dataPerPage, count)
 
-	transmutations, err := models.GetTransmutations(element1, A1, Z1, element2, A2, Z2, element3, A3, Z3, element4, A4, Z4, paginator.Offset(), dataPerPage)
+	transmutations, err := models.GetTransmutations(element1, A1, Z1, element2, A2, Z2, element3, A3, Z3, element4, A4, Z4,sortorders, paginator.Offset(), dataPerPage)
 	if err != nil {
 		c.Error(http.StatusInternalServerError, err)
 		return
@@ -138,6 +148,7 @@ func (c *Transmutation22Controller) Get() {
 	c.Data["A4"] = A4
 	c.Data["Z4"] = Z4
 	c.Data["Limit"] = limit
+	c.Data["Sortorder"] = sortorder
 	c.TplName = "transmutation22.tpl"
 }
 
@@ -225,6 +236,15 @@ func (c *Transmutation22Controller) Post() {
 		}
 		queryString += fmt.Sprintf("%s=%s", "Z4", Z4)
 	}
+	sortorders := []string{"-Mev"}
+	sortorder := c.GetString("sortorder")
+	if len(sortorder) > 0 {
+		if len(queryString) > 0 {
+			queryString += "&"
+		}
+		queryString += fmt.Sprintf("%s=%s", "sortorder", sortorder)
+		sortorders = strings.Split(sortorder, ",")
+	}
 
 	limit := "50"
 	if len(c.GetString("limit")) > 0 {
@@ -244,7 +264,7 @@ func (c *Transmutation22Controller) Post() {
 
 	paginator := pagination.SetPaginator(c.Ctx, dataPerPage, count)
 
-	transmutations, err := models.GetTransmutations(element1, A1, Z1, element2, A2, Z2, element3, A3, Z3, element4, A4, Z4, paginator.Offset(), dataPerPage)
+	transmutations, err := models.GetTransmutations(element1, A1, Z1, element2, A2, Z2, element3, A3, Z3, element4, A4, Z4,sortorders, paginator.Offset(), dataPerPage)
 	if err != nil {
 		c.Error(http.StatusInternalServerError, err)
 		return
@@ -266,8 +286,10 @@ func (c *Transmutation22Controller) Post() {
 	c.Data["A4"] = A4
 	c.Data["Z4"] = Z4
 	c.Data["Limit"] = limit
+	c.Data["Sortorder"] = sortorder
 	c.TplName = "transmutation22.tpl"
 }
+
 func (c *Transmutation22Controller) Csv() {
 	element1 := c.GetString("element1")
 	A1 := c.GetString("A1")
@@ -281,6 +303,11 @@ func (c *Transmutation22Controller) Csv() {
 	element4 := c.GetString("element4")
 	A4 := c.GetString("A4")
 	Z4 := c.GetString("Z4")
+	sortorders := []string{"-Mev"}
+	sortorder := c.GetString("sortorder")
+	if len(sortorder) > 0 {
+		sortorders = strings.Split(sortorder, ",")
+	}
 
 	count, err := models.GetTransmutationsCount(element1, A1, Z1, element2, A2, Z2, element3, A3, Z3, element4, A4, Z4)
 	if err != nil {
@@ -288,7 +315,7 @@ func (c *Transmutation22Controller) Csv() {
 		return
 	}
 
-	transmutations, err := models.GetTransmutations(element1, A1, Z1, element2, A2, Z2, element3, A3, Z3, element4, A4, Z4, 0, int(count))
+	transmutations, err := models.GetTransmutations(element1, A1, Z1, element2, A2, Z2, element3, A3, Z3, element4, A4, Z4,sortorders, 0, int(count))
 	if err != nil {
 		c.Error(http.StatusInternalServerError, err)
 		return

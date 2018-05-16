@@ -44,10 +44,10 @@
     </div>
     <nav>
         <ul>
-            <li><a href="/isotopes">Table of Stable Isotopes</a></li>
-            <li><a href="/transmutations22">Table of conversion 2 Nucleides into 2 Nucleides</a></li>
-            <li><a href="/fusions">Tables of Fusions</a></li>
-            <li><a href="/fissions">Tables of Fissions</a></li>
+            <li><a href="/isotopes">Considered Isotopes</a></li>
+            <li><a href="/transmutations22">2 to 2 atom nucleon transfer reactions</a></li>
+            <li><a href="/fusions">Fusion reactions</a></li>
+            <li><a href="/fissions">Fission reactions</a></li>
         </ul>
     </nav>
 </header>
