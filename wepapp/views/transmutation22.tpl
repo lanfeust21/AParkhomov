@@ -40,7 +40,7 @@
 </head>
 <body>
 <header>
-    <h1 class="logo">Table of Stable Transmutations - data provided by Alexander Parkhomov</h1>
+    <h1 class="logo">2 to 2 atom nucleon transfer reactions- data provided by Alexander Parkhomov</h1>
     <h2>Facilitated by the Martin Fleischmann Memorial Project @ QuantumHeat.org</h2>
 
     <nav>
@@ -54,7 +54,7 @@
 </header>
 
 <div id="stable">
-    <h2>Stable Transmutations</h2>
+    <h2>2 to 2 atom nucleon transfer reactions</h2>
     <div class="description">
         <pre>
             <span class="source">first pair (sources)</span>     -----> second pair (products)

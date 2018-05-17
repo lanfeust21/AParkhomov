@@ -33,6 +33,5 @@ The DockerFile allow to run the application in a docker container. it allows you
 
 https://github.com/karalabe/xgo
 go get -u github.com/karalabe/xgo
-xgo --ldflags="$LD_FLAGS" -out webapp-app . --targets=linux/amd64
 
 xgo  -targets=linux/amd64 -out webapp-app .

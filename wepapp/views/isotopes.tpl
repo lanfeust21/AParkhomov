@@ -37,7 +37,7 @@
 </head>
 <body>
 <header>
-    <h1 class="logo">Table of Stable Isotopes - data provided by Alexander Parkhomov</h1>
+    <h1 class="logo">Considered Isotopes - data provided by Alexander Parkhomov</h1>
     <h2>Facilitated by the Martin Fleischmann Memorial Project @ QuantumHeat.org</h2>
     <div class="description">
         All stable isotopes and radioactive 1n 60Со 90Sr 137Cs 232Th 235U 238U 239Pu

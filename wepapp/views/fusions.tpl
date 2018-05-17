@@ -40,7 +40,7 @@
 </head>
 <body>
 <header>
-    <h1 class="logo">Table of Nuclear fusion - data provided by Alexander Parkhomov</h1>
+    <h1 class="logo">Fusion reactions - data provided by Alexander Parkhomov</h1>
     <h2>Facilitated by the Martin Fleischmann Memorial Project @ QuantumHeat.org</h2>
 
     <nav>
@@ -54,7 +54,7 @@
 </header>
 
 <div id="stable">
-    <h2>Nuclear fusion</h2>
+    <h2>Fusion reactions</h2>
     <div class="description">
         <pre>
             <span class="source">first pair (sources)</span>    -----> product

@@ -40,7 +40,7 @@
 </head>
 <body>
 <header>
-    <h1 class="logo">Table of Nuclear fission - data provided by Alexander Parkhomov</h1>
+    <h1 class="logo">Fission reactions - data provided by Alexander Parkhomov</h1>
     <h2>Facilitated by the Martin Fleischmann Memorial Project @ QuantumHeat.org</h2>
 
     <nav>
@@ -54,7 +54,7 @@
 </header>
 
 <div id="stable">
-    <h2>Nuclear fission</h2>
+    <h2>Fission reactions</h2>
     <div class="description">
         <pre>
             <span class="source">source</span>  -----> pair (products)
