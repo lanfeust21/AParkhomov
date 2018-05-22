@@ -111,6 +111,10 @@ func (c *Transmutation22Controller) Get() {
 	limit := "50"
 	if len(c.GetString("limit")) > 0 {
 		limit = c.GetString("limit")
+		if len(queryString) > 0 {
+			queryString += "&"
+		}
+		queryString += fmt.Sprintf("%s=%s", "limit", limit)
 	}
 	dataPerPage, err := strconv.Atoi(limit)
 	if err != nil {
@@ -249,6 +253,10 @@ func (c *Transmutation22Controller) Post() {
 	limit := "50"
 	if len(c.GetString("limit")) > 0 {
 		limit = c.GetString("limit")
+		if len(queryString) > 0 {
+			queryString += "&"
+		}
+		queryString += fmt.Sprintf("%s=%s", "limit", limit)
 	}
 	dataPerPage, err := strconv.Atoi(limit)
 	if err != nil {
@@ -325,7 +333,7 @@ func (c *Transmutation22Controller) Csv() {
 	c.Ctx.Output.Header("Content-Disposition", "attachment; filename=transmutations.csv")
 
 	writer := csv.NewWriter(c.Controller.Ctx.ResponseWriter)
-	err = writer.Write(transmutations[0].ToList())
+	err = writer.Write(models.Transmutation22ToHeader())
 	if err != nil {
 		fmt.Println("Error:", err)
 		return

@@ -3,6 +3,7 @@ package models
 import (
 	"github.com/astaxie/beego/orm"
 	"github.com/go-errors/errors"
+	"strconv"
 )
 
 func init() {
@@ -31,10 +32,10 @@ func (i *Transmutation22) TableName() string {
 }
 
 func (i *Transmutation22) ToList() []string {
-	return []string{i.Element1, string(i.A1), string(i.Z1), i.Element2, string(i.A2), string(i.Z2), i.Element3, string(i.A3), string(i.Z3), i.Element4, string(i.A4), string(i.Z4), i.Mev}
+	return []string{i.Element1, strconv.Itoa(i.A1), strconv.Itoa(i.Z1), i.Element2, strconv.Itoa(i.A2), strconv.Itoa(i.Z2), i.Element3, strconv.Itoa(i.A3), strconv.Itoa(i.Z3), i.Element4, strconv.Itoa(i.A4), strconv.Itoa(i.Z4), i.Mev}
 }
-func (i *Transmutation22) ToHeader() []string {
-	return []string{"Element1", "A1", "Z1", "Element2", "i.A2", "i.Z2", "Element3", "A3", "Z3", "Element4", "A4", "Z4", "Mev"}
+func Transmutation22ToHeader() []string {
+	return []string{"Element1", "A1", "Z1", "Element2", "A2", "Z2", "Element3", "A3", "Z3", "Element4", "A4", "Z4", "Mev"}
 }
 
 func GetAllTransmutations(sortorder[]string, offset int, limit int) ([]*Transmutation22, error) {

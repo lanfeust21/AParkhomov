@@ -84,6 +84,10 @@ func (c *FusionController) Get() {
 	limit := "50"
 	if len(c.GetString("limit")) > 0 {
 		limit = c.GetString("limit")
+		if len(queryString) > 0 {
+			queryString += "&"
+		}
+		queryString += fmt.Sprintf("%s=%s", "limit", limit)
 	}
 	dataPerPage, err := strconv.Atoi(limit)
 	if err != nil {
@@ -187,6 +191,10 @@ func (c *FusionController) Post() {
 	limit := "50"
 	if len(c.GetString("limit")) > 0 {
 		limit = c.GetString("limit")
+		if len(queryString) > 0 {
+			queryString += "&"
+		}
+		queryString += fmt.Sprintf("%s=%s", "limit", limit)
 	}
 	dataPerPage, err := strconv.Atoi(limit)
 	if err != nil {
@@ -245,7 +253,7 @@ func (c *FusionController) Csv() {
 	c.Ctx.Output.Header("Content-Disposition", "attachment; filename=fusions.csv")
 
 	writer := csv.NewWriter(c.Controller.Ctx.ResponseWriter)
-	err = writer.Write(fusions[0].ToList())
+	err = writer.Write(models.FusionToHeader())
 	if err != nil {
 		fmt.Println("Error:", err)
 		return
