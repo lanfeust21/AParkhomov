@@ -3,6 +3,7 @@ package models
 import (
 	"github.com/astaxie/beego/orm"
 	"github.com/go-errors/errors"
+	"strconv"
 )
 
 func init() {
@@ -20,15 +21,26 @@ type Isotope struct {
 	Mev     string `orm:"column(Mev)"  db:"Mev"`
 	Percent string `orm:"column(%)"  db:"%"`
 }
+func (i *Isotope) ToList() []string {
+	return []string{ i.Element,strconv.Itoa(i.A),strconv.Itoa(i.Z),i.AEM,i.Mev,i.Percent}
+}
+func IsotopeToHeader() []string {
+	return []string{"Element","A","Z","AEM","Mev","%"}
+}
 
 func (i *Isotope) TableName() string {
 	return "stable_isotopes"
 }
 
-func GetIsotopes() ([]*Isotope, error) {
+func GetAllIsotopes(sortorder []string) ([]*Isotope, error) {
 	var isotopes []*Isotope
 
 	q := orm.NewOrm().QueryTable(&Isotope{}).OrderBy("-id")
+	if len(sortorder) > 0 {
+		q = q.OrderBy(sortorder...)
+	} else {
+		q = q.OrderBy("-Mev")
+	}
 
 	if _, err := q.All(&isotopes); err != nil {
 		return nil, errors.Wrap(err, 0)
@@ -37,11 +49,15 @@ func GetIsotopes() ([]*Isotope, error) {
 	return isotopes, nil
 }
 
-func GetIsotopesFrom(element string, A string, Z string) ([]*Isotope, error) {
+func GetIsotopes( element string, A string, Z string,sortorder []string, offset int, limit int) ([]*Isotope, error) {
 	var isotopes []*Isotope
 
-	q := orm.NewOrm().QueryTable(&Isotope{}).OrderBy("-id").Limit(50)
-
+	q := orm.NewOrm().QueryTable(&Isotope{}).OrderBy([]string{"-Mev","-%"}...).Limit(limit).Offset(offset)
+	if len(sortorder) > 0 {
+		q = q.OrderBy(sortorder...)
+	} else {
+		q = q.OrderBy("-Mev")
+	}
 	if len(element) > 0 {
 		q = q.Filter("element", element)
 	}
@@ -58,6 +74,7 @@ func GetIsotopesFrom(element string, A string, Z string) ([]*Isotope, error) {
 
 	return isotopes, nil
 }
+
 
 type Element struct {
 	Element string

@@ -8,6 +8,7 @@ import (
 func init() {
     beego.Router("/", &controllers.MainController{})
 	beego.Router("/isotopes", &controllers.IsotopesController{})
+	beego.Router("/isotopes/csv", &controllers.IsotopesController{}, "get:Csv")
 	beego.Router("/isotopes/element", &controllers.IsotopesController{}, "get:Autocomplete")
 	beego.Router("/transmutations22", &controllers.Transmutation22Controller{})
 	beego.Router("/transmutations22/csv", &controllers.Transmutation22Controller{}, "get:Csv")

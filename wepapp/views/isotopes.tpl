@@ -36,6 +36,7 @@
     </style>
 </head>
 <body>
+{{ $QS := .QueryString }}
 <header>
     <h1 class="logo">Considered Isotopes - data provided by Alexander Parkhomov</h1>
     <h2>Facilitated by the Martin Fleischmann Memorial Project @ QuantumHeat.org</h2>
@@ -66,9 +67,16 @@
             <label for="z">Z</label>
             <input class="form-control" type="text" name="Z" value="{{.Z}}"/>
         </p>
+        <p class="form-group">
+            <label for="sortorder">Sort Order</label>
+            <select class="form-control"  name="sortorder">
+                <option value="-Mev,-%" {{if eq .Sortorder "-Mev,-%"}} selected="true"{{end}}>Mev desc,% desc</option>
+                <option value="-%,-Mev" {{if eq .Sortorder "-%,-Mev"}} selected="true"{{end}}>% desc,Mev desc</option>
+            </select>
+        </p>
         <input type="submit" name="Filter" value="filter"/>
     </form>
-    <div>count:{{.Count}}</div>
+    <div>count:{{.Count}} &nbsp;{{ Link "/isotopes/csv" "CSV Export" $QS }}</div>
     <table class="table table-striped m900">
         <thead>
         <tr>

@@ -3,6 +3,9 @@ package controllers
 import (
 	"github.com/lanfeust21/AParkhomov/wepapp/models"
 	"net/http"
+	"encoding/csv"
+	"fmt"
+	"strings"
 )
 
 type IsotopesController struct {
@@ -10,23 +13,92 @@ type IsotopesController struct {
 }
 
 func (c *IsotopesController) Get() {
+	queryString := ""
+	sortorders := []string{"-Mev"}
+	sortorder := c.GetString("sortorder")
+	if len(sortorder) > 0 {
+		if len(queryString) > 0 {
+			queryString += "&"
+		}
+		queryString += fmt.Sprintf("%s=%s", "sortorder", sortorder)
+		sortorders = strings.Split(sortorder, ",")
+	}
+	element := c.GetString("element")
+	if len(element) > 0 {
+		if len(queryString) > 0 {
+			queryString += "&"
+		}
+		queryString += fmt.Sprintf("%s=%s", "element", element)
+	}
+	A := c.GetString("A")
+	if len(A) > 0 {
+		if len(queryString) > 0 {
+			queryString += "&"
+		}
+		queryString += fmt.Sprintf("%s=%s", "A", A)
+	}
+	Z := c.GetString("Z")
+	if len(Z) > 0 {
+		if len(queryString) > 0 {
+			queryString += "&"
+		}
+		queryString += fmt.Sprintf("%s=%s", "Z", Z)
+	}
 
-	isotopes, err := models.GetIsotopes()
+	isotopes, err := models.GetAllIsotopes(sortorders)
 	if err != nil {
 		c.Error(http.StatusInternalServerError, err)
 		return
 	}
 	c.Data["Count"] = len(isotopes)
 	c.Data["Isotopes"] = isotopes
+	c.Data["Sortorder"] = sortorder
+	c.Data["QueryString"] = queryString
 	c.TplName = "isotopes.tpl"
 }
 
 
 func (c *IsotopesController) Post() {
+
+	queryString := ""
+	sortorders := []string{"-Mev"}
+	sortorder := c.GetString("sortorder")
+	if len(sortorder) > 0 {
+		if len(queryString) > 0 {
+			queryString += "&"
+		}
+		queryString += fmt.Sprintf("%s=%s", "sortorder", sortorder)
+		sortorders = strings.Split(sortorder, ",")
+	}
 	element := c.GetString("element")
+	if len(element) > 0 {
+		if len(queryString) > 0 {
+			queryString += "&"
+		}
+		queryString += fmt.Sprintf("%s=%s", "element", element)
+	}
 	A := c.GetString("A")
+	if len(A) > 0 {
+		if len(queryString) > 0 {
+			queryString += "&"
+		}
+		queryString += fmt.Sprintf("%s=%s", "A", A)
+	}
 	Z := c.GetString("Z")
-	isotopes, err := models.GetIsotopesFrom(element,A,Z)
+	if len(Z) > 0 {
+		if len(queryString) > 0 {
+			queryString += "&"
+		}
+		queryString += fmt.Sprintf("%s=%s", "Z", Z)
+	}
+
+	count, err := models.GetIsotopesCount( element, A, Z)
+	if err != nil {
+		c.Error(http.StatusInternalServerError, err)
+		return
+	}
+
+	isotopes, err := models.GetIsotopes( element, A, Z,sortorders, 0, int(count))
 	if err != nil {
 		c.Error(http.StatusInternalServerError, err)
 		return
@@ -36,19 +108,77 @@ func (c *IsotopesController) Post() {
 	c.Data["Element"] = element
 	c.Data["A"] = A
 	c.Data["Z"] = Z
+	c.Data["Sortorder"] = sortorder
+	c.Data["QueryString"] = queryString
 	c.TplName = "isotopes.tpl"
 }
 
 
-/*
-{
-"suggestions": [
-	{ "value": "United Arab Emirates", "data": "AE" },
-	{ "value": "United Kingdom",       "data": "UK" },
-	{ "value": "United States",        "data": "US" }
-]
+
+func (c *IsotopesController) Csv() {
+
+	queryString := ""
+	sortorders := []string{"-Mev"}
+	sortorder := c.GetString("sortorder")
+	if len(sortorder) > 0 {
+		if len(queryString) > 0 {
+			queryString += "&"
+		}
+		queryString += fmt.Sprintf("%s=%s", "sortorder", sortorder)
+		sortorders = strings.Split(sortorder, ",")
+	}
+	element := c.GetString("element")
+	if len(element) > 0 {
+		if len(queryString) > 0 {
+			queryString += "&"
+		}
+		queryString += fmt.Sprintf("%s=%s", "element", element)
+	}
+	A := c.GetString("A")
+	if len(A) > 0 {
+		if len(queryString) > 0 {
+			queryString += "&"
+		}
+		queryString += fmt.Sprintf("%s=%s", "A", A)
+	}
+	Z := c.GetString("Z")
+	if len(Z) > 0 {
+		if len(queryString) > 0 {
+			queryString += "&"
+		}
+		queryString += fmt.Sprintf("%s=%s", "Z", Z)
+	}
+
+	count, err := models.GetIsotopesCount( element, A, Z)
+	if err != nil {
+		c.Error(http.StatusInternalServerError, err)
+		return
+	}
+
+	isotopes, err := models.GetIsotopes( element, A, Z,sortorders, 0, int(count))
+	if err != nil {
+		c.Error(http.StatusInternalServerError, err)
+		return
+	}
+
+	c.Ctx.Output.Header("Content-Type", "text/csv")
+	c.Ctx.Output.Header("Content-Disposition", "attachment; filename=fusions.csv")
+
+	writer := csv.NewWriter(c.Controller.Ctx.ResponseWriter)
+	err = writer.Write(models.IsotopeToHeader())
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
+	for _, isotope := range isotopes {
+		err := writer.Write(isotope.ToList())
+		if err != nil {
+			fmt.Println("Error:", err)
+			return
+		}
+	}
+	writer.Flush()
 }
-*/
 
 func (c *IsotopesController) Autocomplete() {
 	element := c.GetString("query")

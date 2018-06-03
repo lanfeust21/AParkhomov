@@ -67,40 +67,40 @@
 
         <p class="form-group">
             <label for="element">Element1</label>
-            <input class="form-control" type="text" name="element1"  id="element1" size="2" value=""/>
+            <input class="form-control" type="text" name="element1"  id="element1" size="2" value="{{.Element1}}"/>
         </p>
         <p class="form-group">
             <label for="a">A1</label>
-            <input class="form-control" type="text" name="A1"  size="2" value=""/>
+            <input class="form-control" type="text" name="A1"  size="2" value="{{.A1}}"/>
         </p>
         <p class="form-group">
             <label for="z">Z1</label>
-            <input class="form-control" type="text" name="Z1"  size="2" value=""/>
+            <input class="form-control" type="text" name="Z1"  size="2" value="{{.Z1}}"/>
         </p>
         <p class="form-group">
             <label for="element">Element2</label>
-            <input class="form-control" type="text" name="element2" id="element2"  size="2" value=""/>
+            <input class="form-control" type="text" name="element2" id="element2"  size="2" value="{{.Element2}}"/>
         </p>
         <p class="form-group">
             <label for="a">A2</label>
-            <input class="form-control" type="text" name="A2"  size="2" value=""/>
+            <input class="form-control" type="text" name="A2"  size="2" value="{{.A2}}"/>
         </p>
         <p class="form-group">
             <label for="z">Z2</label>
-            <input class="form-control" type="text" name="Z2"  size="2" value=""/>
+            <input class="form-control" type="text" name="Z2"  size="2" value="{{.Z2}}"/>
         </p>
         &nbsp;--&gt;&nbsp;
         <p class="form-group">
             <label for="element">Element</label>
-            <input class="form-control" type="text" name="element"  id="element"  size="2" value=""/>
+            <input class="form-control" type="text" name="element"  id="element"  size="2" value="{{.Element}}"/>
         </p>
         <p class="form-group">
             <label for="a">A</label>
-            <input class="form-control" type="text" name="A"  size="2" value=""/>
+            <input class="form-control" type="text" name="A"  size="2" value="{{.A}}"/>
         </p>
         <p class="form-group">
             <label for="z">Z</label>
-            <input class="form-control" type="text" name="Z"  size="2" value=""/>
+            <input class="form-control" type="text" name="Z"  size="2" value="{{.Z}}"/>
         </p>
         <p class="form-group">
             <label for="limit">Result per page</label>
